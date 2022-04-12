@@ -9,6 +9,7 @@ public class SampleDirectRoute extends RouteBuilder {
 
     public void configure() throws Exception {
 
+        //direct:sampleInput - end point
         from("direct:sampleInput")
                 .log("Received Message is ${body} and Headers are ${headers}")
         .to("file:sampleOutput?fileName=output.txt");

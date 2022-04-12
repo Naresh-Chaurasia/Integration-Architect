@@ -123,6 +123,40 @@ image::images/message-exchange-ps.png[]
 
 image::images/camel/URI.png[]
 
+----
+context.addRoutes(new RouteBuilder() {
+    @Override
+    public void configure() throws Exception {
+        from("file:data/input?noop=true")
+                .to("file:data/output");
+    }
+});
+----
+
+---
+
+*Lab : Logging in Camel*
+
+----
+context.addRoutes(new RouteBuilder() {
+    @Override
+    public void configure() throws Exception {
+        from("file:data/input?noop=true")
+                .to("log:?level=INFO&showBody=true&showHeaders=true")
+                //.log("Received Message is ${body} and Headers are ${headers}")
+                .to("file:data/output");
+----
+
+---
+
+*How Camel Transports the content ?*
+
+image::images/camel/message-exchange-udemy.png[]
+
+---
+
+image::message.png[]
+
 ---
 
 *Producers and Consumers in Camel*
@@ -132,18 +166,13 @@ from("file:data/input?noop=true")
     .to("file:data/output");
 ----
 
-* From creates consumer (Event Driven and Polling)
+* from() method creates consumer (Event Driven and Polling)
 
 image::images/consumers.png[]
 
-
-
 ---
 
-image::images/message-exchange-udemy.png[]
-
-
-
+* Producer sends message to end-point.
 
 
 === Section 5: Camel Architecture
@@ -151,6 +180,8 @@ image::images/message-exchange-udemy.png[]
 image::images/camel-architecture.png[]
 
 === Section 6: Testing the Camel Route
+
+*Lab : How to test the Camel Route ?*
 
 ----
 public class CopyFilesRoute extends RouteBuilder {
@@ -186,10 +217,60 @@ public class CopyFilesCamelTest extends CamelTestSupport {
 }
 ----
 
+*Lab : Testing a route using Direct Component*
+
+It is used mainly for testing and development purpose.
+
+
 * Upstream (Source) system is not available: Use direct component
 * Downstream (Destination) system is not available: Use Mocking
 
+----
+public class SampleDirectRoute extends RouteBuilder {
+
+    public void configure() throws Exception {
+
+        //direct:sampleInput - end point
+        from("direct:sampleInput")
+                .log("Received Message is ${body} and Headers are ${headers}")
+        .to("file:sampleOutput?fileName=output.txt");
+    }
+}
+
+// Test Method
+
+@Test
+public void sampleRouteTest() throws InterruptedException {
+
+    /**
+     * Producer Template: It is used to send data to the end point
+     */
+    template.sendBodyAndHeader("direct:sampleInput","Hello", "hi" , 1);
+
+    Thread.sleep(5000);
+
+    File file = new File("sampleOutput");
+
+    assertTrue(file.isDirectory());
+
+    /**
+     * Consumer Template.
+     */
+    /*Exchange exchange = consumer.receive("file:sampleOutput");
+
+    System.out.println("Received body is :" + exchange.getIn().getBody());
+    System.out.println("File Name is :" + exchange.getIn().getHeader("CamelFileName"));
+
+    assertEquals("output.txt", exchange.getIn().getHeader("CamelFileName"));*/
+
+}
+----
+
+*Lab : Testing a Route using Mock Component*
+
 === Section 7: Why Camel ?
+
+image::images/camel/integration-tech-stack.png[]
 
 === Section 8: Camel Boiler Plate Code
 
