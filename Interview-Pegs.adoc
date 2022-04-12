@@ -1,0 +1,45 @@
+= Interview Pegs
+:toc: left
+:toclevels: 5
+:sectnums:
+:sectnumlevels: 5
+
+== Pegs
+
+1. Tie: Infinity
+2. Noah: Transact
+3. Ma: Payments
+4. Rye: Wealth and private banking
+5. Law: Data and Analytics
+6. Shoe: Risk & Compliance
+7. Cow: Fund Management
+8. Ivy: Financial Inclusion
+9. Bee: Retail, Business Banking, Corporate Banking, OnBoarding, *Engage* (Getting engaged with Bee)
+10. Toes: Transact Sector (Drill Sectors in Toes): Retail, Corporate, Wealth, Treasury, Islamic
+11. Tot
+12. Tin
+13. Tomb
+14. Tire
+15. Towel
+16. Dish
+17. Tack
+18. Dove
+19. Tub
+20. Nose
+21. Net
+22. Nun
+23. Name
+24. Nero
+25. Nail
+26. notch
+27. neck
+28. knife
+29. knob
+30. mice
+
+=== Miscellaneous Pegs
+
+* 99. Pipe - Byteman is a tool which makes it easy to trace, monitor and test the behaviour of Java application and JDK runtime code. It injects Java code into your application methods or into Java runtime methods without the need for you to recompile, repackage or even redeploy your application
+* 100. Disease/Thesis - Openwire Protocol
+
+
